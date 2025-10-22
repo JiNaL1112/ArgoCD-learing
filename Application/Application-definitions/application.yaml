@@ -11,7 +11,7 @@ spec:
   source: 
     path: Application/Guestbook
     repoURL: "https://github.com/JiNaL1112/ArgoCD-learing.git"
-    targetRevision: master
+    targetRevision: main
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
