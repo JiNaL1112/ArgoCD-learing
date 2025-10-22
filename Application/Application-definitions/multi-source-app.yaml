@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multi-source-demo
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    # Source 1: NGINX Helm chart
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: nginx
+      targetRevision: 15.0.0
+      helm:
+        releaseName: nginx-demo
+        values: |
+          service:
+            type: ClusterIP
+          replicaCount: 2
+
+    # Source 2: Redis Helm chart
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: redis
+      targetRevision: 19.5.1
+      helm:
+        releaseName: redis-demo
+        values: |
+          architecture: standalone
+          auth:
+            enabled: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-apps
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true 
