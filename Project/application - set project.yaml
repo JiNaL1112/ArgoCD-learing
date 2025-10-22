@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   project: demo-project
   source: 
-    path: Application/guestbook
+    path: Application/Guestbook
     repoURL: "https://github.com/JiNaL1112/ArgoCD-learing.git"
     targetRevision: main
   syncPolicy:
