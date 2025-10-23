@@ -1,19 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata: 
-  name: no-prune-resources
+  name: track-helm-range
   namespace: argocd
 spec:
   destination:
-    namespace: no-prune-resources
+    namespace: track-helm-range
     server: "https://kubernetes.default.svc"
   project: default
   source: 
-    path: Application/sync-options/no-prune
-    repoURL: "https://github.com/JiNaL1112/ArgoCD-learing.git"
-    targetRevision: main
-    directory:
-      recurse: true
+    chart: sealed-secrets
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: 1.* # you can use greater than and smaller than ex: >=3.0.0 <4.1.0
   syncPolicy:
     automated: {}
     syncOptions:

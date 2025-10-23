@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata: 
-  name: no-prune-resources
+  name: track-git-tag
   namespace: argocd
 spec:
   destination:
-    namespace: no-prune-resources
+    namespace: track-git-tag
     server: "https://kubernetes.default.svc"
   project: default
   source: 
-    path: Application/sync-options/no-prune
+    path: Application/Guestbook
     repoURL: "https://github.com/JiNaL1112/ArgoCD-learing.git"
-    targetRevision: main
+    targetRevision: V1
     directory:
       recurse: true
   syncPolicy:

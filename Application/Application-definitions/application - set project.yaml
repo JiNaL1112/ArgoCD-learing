@@ -1,22 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata: 
-  name: no-prune-resources
+  name: guestbook-demo-project
   namespace: argocd
-spec:
-  destination:
-    namespace: no-prune-resources
+spec: 
+  destination: 
+    namespace: guestbook-demo-project
     server: "https://kubernetes.default.svc"
-  project: default
+  project: demo-project
   source: 
-    path: Application/sync-options/no-prune
+    path: Application/guestbook
     repoURL: "https://github.com/JiNaL1112/ArgoCD-learing.git"
     targetRevision: main
-    directory:
-      recurse: true
   syncPolicy:
-    automated: {}
     syncOptions:
       - CreateNamespace=true
-
-    
